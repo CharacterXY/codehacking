@@ -8,7 +8,9 @@
                 <div class="panel-heading">Welcome</div>
 
                 <div class="panel-body">
-                    Your Application's Landing Page.
+                    Dobro došli na codehacking stranicu.
+                    U ovoj stranici cemo predstaviti neke funkcionalnosti web developmenta.
+                    Kako radimo s frameworkom Laravel tako cemo predstaviti njegove funkcije.
                 </div>
             </div>
         </div>
