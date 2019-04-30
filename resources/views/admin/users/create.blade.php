@@ -1,7 +1,10 @@
 @extends('layouts.admin')
 
+
+
 @section('content')
 
+{{ csrf_token() }}
 <h1>Create Users</h1>
 
 {{--<form method="post" action="/posts">--}}
@@ -25,8 +28,8 @@
     </div>
 
     <div class="form-group">
-            {!! Form::label('file', 'Files:') !!}
-            {!! Form::file('file', null, ['class' =>'form-control', 'placeholder' => 'Confirm a password']) !!}
+            {!! Form::label('photo_id', 'Files:') !!}
+            {!! Form::file('photo_id', null, ['class' =>'form-control']) !!}
     </div>
 
    
@@ -38,7 +41,7 @@
     
     <div class="form-group">
             {!! Form::label('is_active', 'Status:') !!}
-            {!! Form::select('is_active', array(1 => 'Is Active', 0 => 'Not Active'), 0, ['class' =>'form-control']) !!}
+            {!! Form::select('is_active', array(1 => 'Is Active', 0 => 'Not Active'), 0, ['class' =>'form-control', 'placeholder' => 'Choose a status']) !!}
     </div>
 
   
@@ -51,8 +54,11 @@
     {!! Form::close() !!}
 
 
+</div>
 
-@include('includes.form_error')
+<div class="row">
+        @include('includes.form_error')
+</div>
 
 
 
