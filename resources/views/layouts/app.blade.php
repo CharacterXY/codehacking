@@ -48,8 +48,12 @@
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Home</a></li>
+                   {{--  <li>
+                            @if(Auth::user()->isAdmin == 1)   
+                            <a href="{{ url('/admin') }}">Admin</a>    
+                        </li>
+                        @endif --}}
                 </ul>
-
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->

@@ -4,7 +4,7 @@
 
 @section('content')
 
-{{ csrf_token() }}
+
 <h1>Create Users</h1>
 
 {{--<form method="post" action="/posts">--}}

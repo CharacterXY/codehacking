@@ -3,6 +3,15 @@
 
 @section('content')
 
+  @if(Session::has('message'))
+     <div class="row">
+       <div class="alert alert-danger">
+       <h2>{{Session::has('message')}}</h2>
+     </div>
+    </div>
+  @endif
+
+
 
 <h1>Users<h1>     
           <table class="table">
