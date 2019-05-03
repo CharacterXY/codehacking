@@ -40,8 +40,8 @@ class AdminUsersController extends Controller
         $roles = Role::lists('name', 'id')->all();
 
         
-        Session::flash("createUser", "User has been created successfully !");
         return view('admin.users.create', compact('roles'));
+
     }
 
     /**
