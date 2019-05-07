@@ -3,8 +3,46 @@
 
 @section('content')
 
+    
+        <div class="row">
+                @if(Session::has('post_updated'))
+            <div class="alert alert-success">
+                <h2>{{session('post_updated')}}</h2>
+                @endif   
+            </div>
+        </div>
+     
 
-<h1>Posts<h1>   
+       
+        <div class="row">
+                @if(Session::has('deleted_post'))
+            <div class="alert alert-warning">        
+                <h2>{{session('deleted_post')}}</h2>
+                @endif
+            </div>
+        </div>
+
+        <div class="row">
+                @if(Session::has('created_post'))
+            <div class="alert alert-warning">        
+                <h2>{{session('created_post')}}</h2>
+                @endif
+            </div>
+        </div>
+
+        <script>
+                var msg = '{{ Session::get('alert')}}';
+                var exist = '{{Session::has('alert')}}';
+                if(exist){
+                  alert(msg);
+                }
+        </script>
+
+    
+
+
+<h1>Posts<h1>
+        <div>
         <table class="table table-sm table-dark">
           <thead>
             <tr>
@@ -26,11 +64,11 @@
             <tr>
                    
               <td>{{$post->id}}</td>
-              <td><img height="50" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/400x400'}}" alt=""> </td>
-              <td >{{$post->user->name}}</td>
-              <td>{{$post->category ? $post->category->name : 'Category doesnt exists'}}</td>            
+              <td><img height="90" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/400x400'}}" alt=""> </td>
+              <td><a href="{{route('admin.posts.edit', $post->id ) }}">{{$post->user->name}}</a></td>
+              <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>            
               <td>{{$post->title}}</td>
-              <td>{{$post->body}}</td>
+              <td>{{str_limit($post->body, 7)}}</td>
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>
             </tr>
@@ -38,7 +76,8 @@
             
             @endif
         </tbody>
-    </table>    
-</body>
-</html>   
+    </table>
+
+
+    
 @stop 
