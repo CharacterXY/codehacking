@@ -43,7 +43,7 @@
 
 <h1>Posts<h1>
         <div>
-        <table class="table table-sm table-dark">
+        <table class="table">
           <thead>
             <tr>
               <th>Id</th>
@@ -52,6 +52,8 @@
               <th>Category</th>  
               <th>Title</th>
               <th>Body</th>
+              <th>Post Link</th>
+              <th>Comments</th>
               <th>Created</th>
               <th>Updated</th>
             </tr>
@@ -61,8 +63,7 @@
               @if($posts)
 
               @foreach($posts as $post)
-            <tr>
-                   
+            <tr>  
               <td>{{$post->id}}</td>
               <td><img height="90" src="{{$post->photo ? $post->photo->file : 'http://placehold.it/400x400'}}" alt=""> </td>
               <td><a href="{{route('admin.posts.edit', $post->id ) }}">{{$post->user->name}}</a></td>
@@ -74,6 +75,7 @@
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>
             </tr>
+         
             @endforeach
             
             @endif

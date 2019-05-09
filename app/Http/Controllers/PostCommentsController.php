@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 
-
+use App\Category;
 use App\Post;
 use App\Comment;
 
@@ -50,7 +50,7 @@ class PostCommentsController extends Controller
         
         $user = Auth::user();
 
-        $data = [
+         $data = [
 
             'post_id' => $request->post_id,
             'author' => $user->name,
@@ -63,7 +63,7 @@ class PostCommentsController extends Controller
         
         $request->session()->flash('comment_message', 'You\'re message has been submitted and is waiting moderate');
 
-        return redirect()->back();
+        return redirect()->back(); 
 
 
 
@@ -80,6 +80,14 @@ class PostCommentsController extends Controller
     public function show($id)
     {
         //
+        $post = post::findOrFail($id);
+
+        $comments = $post->comments;
+
+        return view('admin.comments.show', compact('comments'));
+
+
+
     }
 
     /**

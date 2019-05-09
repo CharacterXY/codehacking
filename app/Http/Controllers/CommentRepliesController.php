@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\CommentReplies;
 use App\Comment;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CommentRepliesController extends Controller
 {
@@ -40,6 +44,27 @@ class CommentRepliesController extends Controller
         //
     }
 
+    public function createReplay(Request $request){
+
+        $user = Auth::user();
+
+
+        $data = [
+
+            'comment_id' => $request->comment_id,
+            'author'  => $user->name,
+            'email' => $user->email,
+            'photo' => $user->photo->file,
+            'body' => $request->body
+        ];
+
+        $replies = CommentReplies::create($data);
+
+        $request->session()->flash('replies_message', 'You\'re message has been replied');
+
+        return redirect()->back(); 
+    }
+
     /**
      * Display the specified resource.
      *
@@ -48,7 +73,12 @@ class CommentRepliesController extends Controller
      */
     public function show($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+
+        $replies = $comment->replies;
+
+        return view('admin.comments.replies.show', compact('replies'));
+        
     }
 
     /**
@@ -72,6 +102,10 @@ class CommentRepliesController extends Controller
     public function update(Request $request, $id)
     {
         //
+
+        CommentReplies::findOrFail($id)->update($request->all());
+
+        return redirect()->back();
     }
 
     /**
@@ -83,5 +117,10 @@ class CommentRepliesController extends Controller
     public function destroy($id)
     {
         //
+        CommentReplies::findOrfail($id)->delete();
+
+        return redirect()->back();
+
+
     }
 }

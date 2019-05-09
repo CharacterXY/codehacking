@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    @if(count($comments) > 0)
+    @if($comments) 
         <h1>Comments</h1>
         <table class="table">
             <thead>
@@ -13,7 +13,7 @@
             </thead>
             <tbody>
 
-                @foreach($comments as $comment)
+            @foreach($comments as $comment)
 
                 <tr>
                     <td>{{$comment->id}}</td>
@@ -21,8 +21,8 @@
                     <td>{{$comment->body}}</td>
                     <td>{{$comment->body}}</td>
                     <td><a href="{{ route('home.post', $comment->post->id) }}">View Post</a></td>
+                    <td><a href="{{route('admin.comment.replies.show', $comment->id) }}">View Replies</a></td>
                     <td>
-
                         @if($comment->is_active == 1)
                        
                             {!! Form::open(['method'=>'PATCH', 'action'=> ['PostCommentsController@update', $comment->id]]) !!}
@@ -50,15 +50,16 @@
                             </div>
                         {!! Form::close() !!}
                     </td>
-                   
-                </td>
-               </tr>
-                @endforeach
-            </tbody>
+                    </td>
+                </tr>
+            @endforeach
+         </tbody>
         </table>
- 
     @else
-        <h1 class='text-center'>No Comments</h1>
-    @endif
- 
+  
+   
+     <h1 class='text-center'>No Comments</h1>
+@endif
+
+
 @stop

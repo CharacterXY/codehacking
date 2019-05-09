@@ -54,7 +54,7 @@ class AdminUsersController extends Controller
     {
        
        
-        if($request->password == '')
+        if(trim($request->password == ''))
         {
             $input = $request->except('password');
 
@@ -138,7 +138,7 @@ class AdminUsersController extends Controller
     {   
         $user = User::findOrFail($id);
 
-        if($request->password == '')
+        if(trim($request->password == ''))
         {
             $input = $request->except('password');
 
